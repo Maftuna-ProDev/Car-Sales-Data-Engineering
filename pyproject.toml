@@ -1,0 +1,13 @@
+[project]
+name = "car-sales-analytics"
+version = "1.0.0"
+description = "Big Data and Business Analytics - Car Sales Analysis Project"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "matplotlib>=3.7.0",
+    "scipy>=1.10.0",
+    "seaborn>=0.12.0",
+]
