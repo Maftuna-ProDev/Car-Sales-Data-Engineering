@@ -22,3 +22,6 @@ outputs/figures/*.png
 *.swp
 *.swo
 *~
+
+# Unnecessary files
+Assignment.md
