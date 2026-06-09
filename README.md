@@ -1,36 +1,55 @@
-# Car Sales Analytics Pipeline
+# Car Sales Analytics Dashboard
 
-A data engineering & analytics project that processes, cleans, and analyzes ~24K car sales records to uncover pricing trends, regional patterns, and feature correlations.
+A data engineering & analytics project processing 23,906 car sales records with an interactive web dashboard.
 
-Built with Python's scientific stack and orchestrated via `uv`.
+**Student:** Baxtiyorov Abdumalik | **Group:** 25-102 | **ID:** 250076
+
+---
 
 ## Tech Stack
 
 | Layer | Tools |
 |-------|-------|
-| Language | Python 3.14 |
-| Package mgmt | `uv` (pip alternative) |
+| Language | Python 3.10+ |
+| Package mgmt | `uv` |
+| Web UI | Streamlit |
 | Data processing | pandas, numpy |
-| Visualization | matplotlib, seaborn |
+| Visualization | matplotlib |
 | Statistics | scipy |
+
+---
 
 ## Quick Start
 
 ```bash
-# Clone & enter
-git clone https://github.com/Abdumalik-ProDev/Car-Sales-Data-Engineering.git
-cd car-sales-data-engineering
-
-# Create venv & install deps
+# Install dependencies
 uv sync
 
-# Run the full pipeline
-uv run python src/main.py
+# Launch web dashboard
+uv run streamlit run src/ui.py
+
+# Or via entry point
+uv run python -m src.main
+
+# Run full pipeline (generates all 15 figures)
+uv run python -m src.main --pipeline
 ```
 
-Outputs land in `outputs/`:
-- `cleaned_data.csv` — preprocessed dataset
-- `figures/` — 15 auto-generated visualizations
+---
+
+## Dashboard Features
+
+| Feature | Description |
+|---------|-------------|
+| **📊 Overview** | Column summary, sample data, descriptive statistics |
+| **💰 Sales & Revenue** | Price distribution, monthly trends, regional sales, dealer prices |
+| **👥 Demographics** | Gender split, income by region, income vs price regression |
+| **🔧 Product Insights** | Company prices, body style analysis, auto vs manual, colors, heatmap |
+| **📈 Statistical Modeling** | Multiple regression, Z-score outliers, normality test |
+| **🔍 Filter & Explore** | Multi-dimensional filtering with CSV export |
+| **⚖️ Compare Segments** | Side-by-side comparison with Welch t-test and plots |
+
+---
 
 ## Project Structure
 
@@ -39,79 +58,41 @@ car-sales-analytics/
 ├── data/
 │   └── Car sales.csv              # Raw dataset (23,906 rows)
 ├── outputs/
-│   ├── cleaned_data.csv            # Cleaned & transformed dataset
+│   ├── cleaned_data.csv            # Cleaned dataset
 │   └── figures/                    # 15 analysis charts (PNG)
 ├── src/
-│   ├── main.py                     # Pipeline entry point
-│   ├── analysis.py                 # All ETL + analytics logic
-│   └── __init__.py
-├── pyproject.toml                  # Project config & deps
-├── uv.lock                         # Lockfile for reproducible builds
-└── .python-version                 # Python version pinning
+│   ├── __init__.py
+│   ├── analysis.py                 # Core engine: ETL, stats, modeling
+│   ├── ui.py                       # Streamlit web dashboard
+│   └── main.py                     # Entry point
+├── main.py                         # Root entry point
+├── pyproject.toml
+└── README.md
 ```
 
-## Pipeline Overview
+---
 
-### 1. Data Ingestion & Cleaning
-- Encoding normalization, date parsing, column standardization
-- Missing value imputation, duplicate removal
-- Outlier capping via IQR
+## Pipeline — 15 Business Questions
 
-### 2. Exploratory Analysis
+**Sales & Revenue:** Q1 Price Distribution · Q2 Monthly Sales Trend · Q3 Sales by Region · Q14 Dealer Prices
 
-15 business questions across 4 categories:
+**Customer Demographics:** Q4 Gender Split · Q5 Income by Region · Q6 Income vs Price (Regression)
 
-**Sales & Revenue**
-- Price distribution (histogram + KDE)
-- Monthly sales trends (time series)
-- Regional sales volume
-- Dealer price comparison
+**Product Insights:** Q7 Avg Price by Company · Q8 Price by Body Style · Q9 Auto vs Manual (t-test) · Q10 Popular Colors · Q11 Body Style × Transmission (Heatmap)
 
-**Customer Demographics**
-- Gender split
-- Income variation by region
-- Income vs. purchase price correlation
+**Statistical Modeling:** Q12 Multiple Linear Regression · Q13 Z-score Outliers · Q15 Normality Test (Shapiro-Wilk)
 
-**Product Insights**
-- Average price by manufacturer
-- Price variation by body style
-- Automatic vs. manual pricing (t-test)
-- Popular car colors
-- Body style × transmission combos (heatmap)
-
-**Statistical Modeling**
-- Multiple linear regression (price ~ income + transmission + engine + body style)
-- Z-score outlier detection
-- Normality testing (Shapiro-Wilk + Q-Q plot)
+---
 
 ## Key Findings
 
 | Metric | Value |
 |--------|-------|
+| Total records | 23,906 |
 | Total revenue | $655.6M |
 | Avg car price | $27,426 (median $23,000) |
-| Top body styles | SUV (27%), Hatchback (26%), Sedan (19%) |
-| Top region | Austin (17% of sales) |
+| Top body style | SUV (27%) |
+| Top region | Austin (17%) |
 | Highest avg price brand | Cadillac ($37,557) |
 | Gender split | 79% Male / 21% Female |
 | Transmission | 53% Automatic / 47% Manual |
-
-## Development
-
-```bash
-# Add a dependency
-uv add <package>
-
-# Run in an existing venv without re-syncing
-uv run src/main.py
-
-# Update lockfile
-uv lock
-```
-
-## Author: 
-Abdumalik-ProDev
-
-## License
-
-MIT
