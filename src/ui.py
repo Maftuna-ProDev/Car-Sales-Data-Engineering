@@ -727,7 +727,7 @@ def render_question(num: str, title: str, question: str, answer: str):
     # Navigation footer
     st.markdown("---")
     all_keys = [q[0].lower() for q in QUESTIONS]
-    idx = all_keys.index(num)
+    idx = all_keys.index(num.lower())
     c1, c2, c3 = st.columns([1, 2, 1])
     if idx > 0:
         prev_k = all_keys[idx - 1]
